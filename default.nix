@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation {
 
   meta = {
     description = "Plocsys custom SDDM theme";
-    license = lib.license.mit;
+    license = lib.licenses.mit;
     platforms = lib.platforms.linux;
   };
 }
