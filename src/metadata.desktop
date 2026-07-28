@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=SDDM Alterra Theme
+Description=Tema de SDDM inspirado en la interfaz de la PDA de Subnautica. Secuencia de arranque animada, logo giratorio y HUD estilo Alterra.
+Type=Service
+ServiceTypes=Plasma/SDDMTheme
+X-KDE-PluginInfo-Author=_WK_
+X-KDE-PluginInfo-Name=sddm-alterra-theme
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=https://github.com/ALT95-WK-ALT95/sddm-alterra-theme
+X-KDE-PluginInfo-Category=Login Themes
+X-KDE-PluginInfo-License=MIT (code) / Fan Art (assets)
