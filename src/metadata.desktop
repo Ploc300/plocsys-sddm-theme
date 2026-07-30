@@ -3,3 +3,9 @@ Name=plocsys-sddm-theme
 Description=Plocsys SDDM theme
 Type=Service
 ServiceTypes=Plasma/SDDMTheme
+
+[X-SDDM-Theme]
+QtVersion=6
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-API=2.0
