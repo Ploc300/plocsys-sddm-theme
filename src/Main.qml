@@ -2,10 +2,17 @@ import QtQuick
 import SddmComponents
 import QtMultimedia
 
+import "components"
+
 Item {
     id: page
     width: 1920
     height: 1080
+
+    Component.onCompleted: {
+        Username.usernameInput.forceActiveFocus();
+        console.log(Username.usernameInput.activeFocus);
+    }
 
     Rectangle {
         anchors.fill: parent
@@ -26,56 +33,58 @@ Item {
         anchors.fill: parent
     }
 
-    Rectangle {
-        id: loginContainer
+    Grid {
+        id: loginGrid
         anchors {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
-            bottomMargin: 120
-        }
-        width: 400
-        height: 80
-        color: "#1e1f2a"
-        border.color: "#434751"
-        border.width: 1
-        radius: 4
-        visible: false
-        opacity: 0
-
-        Behavior on opacity {
-            NumberAnimation { duration: 800 }
+            bottomMargin: 20
         }
 
-        Loader {
-            id: loginLoader
-            x: 0
-            y: 0
-            width: parent.width
-            height: parent.height
-            source: "Login.qml"
-            onLoaded: {
-                item.selectedSession = Qt.binding(function() {
-                    return sessionSelect.currentIndex
-                })
+        columns: 3
+        rows: 2
+        rowSpacing: 20
+        columnSpacing: 80
+
+        horizontalItemAlignment: Grid.AlignHCenter
+
+        Text {
+            id: sessionLabel
+            text: "Session"
+            color: "#c3c6d3"
+            font {
+                family: "Jetbrains Mono"
+                pointSize: 13
+                weight: Font.Medium
             }
         }
-    }
 
-    Timer {
-        id: loginDelay
-        interval: 2000
-        running: true
-        repeat: false
-        onTriggered: {
-            loginContainer.visible = true
-            loginContainer.opacity = 1
-            if (loginLoader.item) {
-                if (loginLoader.item.hasUser) {
-                    loginLoader.item.passwordFocus = true
-                } else {
-                    loginLoader.item.userFocus = true
-                }
+        Text {
+            id: usernameLabel
+            text: "Username"
+            color: "#c3c6d3"
+            font {
+                family: "Jetbrains Mono"
+                pointSize: 13
+                weight: Font.Medium
             }
+        }
+
+        Text {
+            id: passwordLabel
+            text: "Password"
+            color: "#c3c6d3"
+            font {
+                family: "Jetbrains Mono"
+                pointSize: 13
+                weight: Font.Medium
+            }
+        }
+
+        Session {}
+        Username {
+            width: 200
+            height: 20
         }
     }
 }

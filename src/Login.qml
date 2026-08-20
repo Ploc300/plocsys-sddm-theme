@@ -15,7 +15,7 @@ Item {
 
     onVisibleChanged: {
         if (visible)
-            focusTimer.start()
+            focusTimer.start();
     }
 
     Timer {
@@ -25,9 +25,9 @@ Item {
 
         onTriggered: {
             if (hasUser)
-                passwordInput.forceActiveFocus()
+                passwordInput.forceActiveFocus();
             else
-                userInput.forceActiveFocus()
+                userInput.forceActiveFocus();
         }
     }
 
@@ -39,43 +39,43 @@ Item {
         repeat: false
 
         onTriggered: {
-            var xhr = new XMLHttpRequest()
-            xhr.open("GET", "file:///var/lib/sddm/state.conf", false)
-            xhr.send()
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "file:///var/lib/sddm/state.conf", false);
+            xhr.send();
 
-            var match = xhr.responseText.match(/User=(\S+)/)
-            var last = match ? match[1] : ""
+            var match = xhr.responseText.match(/User=(\S+)/);
+            var last = match ? match[1] : "";
 
-            hasUser = last !== ""
-            userName = last
+            hasUser = last !== "";
+            userName = last;
         }
     }
 
     function login() {
-        var user = hasUser ? userName : userInput.text
+        var user = hasUser ? userName : userInput.text;
 
         if (user === "") {
-            showError("Really? No username...")
-            return
+            showError("Really? No username...");
+            return;
         }
 
-        errorMsg.visible = false
-        sddm.login(user, passwordInput.text, selectedSession)
+        errorMsg.visible = false;
+        sddm.login(user, passwordInput.text, selectedSession);
     }
 
     function showError(msg) {
-        errorMsg.text = msg
-        errorMsg.visible = true
-        errorTimer.restart()
+        errorMsg.text = msg;
+        errorMsg.visible = true;
+        errorTimer.restart();
     }
 
     Connections {
         target: sddm
 
         function onLoginFailed() {
-            showError("Access Denied")
-            passwordInput.text = ""
-            passwordInput.forceActiveFocus()
+            showError("Access Denied");
+            passwordInput.text = "";
+            passwordInput.forceActiveFocus();
         }
     }
 
