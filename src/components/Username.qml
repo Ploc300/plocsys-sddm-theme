@@ -5,32 +5,32 @@ Item {
 
     property bool hasUser: false
     property string username: ""
+    property alias usernameInput: input
+
+    signal accepted()
+    signal tabPressed()
+    signal backtabPressed()
 
     Text {
-        id: usernameDisplay
-
-        text: username !== "" ? username : "---"
+        text: root.username || "---"
         color: "#e2e1f1"
-        visible: hasUser
-        font {
-            family: "Jetbrains Mono"
-            pointSize: 12
-            weight: Font.Medium
-        }
+        visible: root.hasUser
+        font { family: "JetBrains Mono"; pointSize: 12; weight: Font.Medium }
     }
 
     TextInput {
-        id: usernameInput
+        id: input
+
         width: parent.width
         color: "#e2e1f1"
-        visible: !hasUser
-        cursorVisible: true
-        KeyNavigation.tab: passwordInput
-        onAccepted: passwordInput.forceActiveFocus()
-        font {
-            family: "Jetbrains Mono"
-            pointSize: 12
-            weight: Font.Medium
-        }
+        selectionColor: "#aec6ff"
+        selectedTextColor: "#002e6b"
+        visible: !root.hasUser
+
+        onAccepted: root.accepted()
+        Keys.onTabPressed: root.tabPressed()
+        Keys.onBacktabPressed: root.backtabPressed()
+
+        font { family: "JetBrains Mono"; pointSize: 12; weight: Font.Medium }
     }
 }
